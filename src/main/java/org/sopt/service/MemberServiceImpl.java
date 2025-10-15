@@ -14,13 +14,17 @@ public class MemberServiceImpl implements MemberService {
     private static long sequence = 1L;
 
     public Long join(String name, String email, Gender gender, LocalDate birthDate) {
-        Member member = Member.createOf(sequence++, name, email, gender, birthDate);
-        if (memberRepository.existsByEmail(email)) {
+        try {
+            Member member = Member.createOf(sequence++, name, email, gender, birthDate);
+            if (memberRepository.existsByEmail(email)) {
+                throw new IllegalStateException("이미 존재하는 이메일입니다.");
+            }
+            Member savedMember = memberRepository.save(member);
+            return savedMember.getId();
+        } catch (IllegalStateException | IllegalArgumentException e){
             sequence--;
-            throw new IllegalStateException("이미 존재하는 이메일입니다.");
+            throw e;
         }
-        Member savedMember = memberRepository.save(member);
-        return savedMember.getId();
     }
 
     public Optional<Member> findOne(Long memberId) {

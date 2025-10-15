@@ -71,7 +71,7 @@ public class Main {
                     Long createdId;
                     try {
                         createdId = memberController.createMember(name, email, gender, birthDate);
-                    } catch (IllegalStateException e) {
+                    } catch (IllegalStateException | IllegalArgumentException e) {
                         System.out.println("❌ " + e.getMessage());
                         continue;
                     }
