@@ -5,26 +5,32 @@ import java.util.List;
 import java.util.Optional;
 import org.sopt.domain.Gender;
 import org.sopt.domain.Member;
-import org.sopt.repository.MemoryMemberRepository;
+import org.sopt.repository.FileMemberRepository;
+import org.sopt.repository.MemberRepository;
 
 public class MemberServiceImpl implements MemberService {
 
-    private final MemoryMemberRepository memberRepository = new MemoryMemberRepository();
-
     private static long sequence = 1L;
 
-    public Long join(String name, String email, Gender gender, LocalDate birthDate) {
-        try {
-            Member member = Member.createOf(sequence++, name, email, gender, birthDate);
-            if (memberRepository.existsByEmail(email)) {
-                throw new IllegalStateException("이미 존재하는 이메일입니다.");
-            }
-            Member savedMember = memberRepository.save(member);
-            return savedMember.getId();
-        } catch (IllegalStateException | IllegalArgumentException e){
-            sequence--;
-            throw e;
+    private final MemberRepository memberRepository = new FileMemberRepository();
+
+    public MemberServiceImpl() {
+        sequence = Math.max(sequence,
+                memberRepository.findAll().stream()
+                        .mapToLong(Member::getId)
+                        .max()
+                        .orElse(0L)
+                        + 1);
+    }
+
+    public synchronized Long join(String name, String email, Gender gender, LocalDate birthDate) {
+        if (memberRepository.existsByEmail(email)) {
+            throw new IllegalStateException("이미 존재하는 이메일입니다.");
         }
+        Long currentId = sequence++;
+        Member member = Member.createOf(currentId, name, email, gender, birthDate);
+        Member savedMember = memberRepository.save(member);
+        return savedMember.getId();
     }
 
     public Optional<Member> findOne(Long memberId) {
