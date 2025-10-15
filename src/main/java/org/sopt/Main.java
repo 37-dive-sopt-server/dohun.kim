@@ -7,15 +7,17 @@ import java.util.Scanner;
 import org.sopt.controller.MemberController;
 import org.sopt.domain.Gender;
 import org.sopt.domain.Member;
-import org.sopt.repository.MemoryMemberRepository;
+import org.sopt.repository.FileMemberRepository;
+import org.sopt.repository.MemberRepository;
+import org.sopt.service.MemberService;
 import org.sopt.service.MemberServiceImpl;
 
 public class Main {
     public static void main(String[] args) {
 
-        MemoryMemberRepository memberRepository = new MemoryMemberRepository();
-        MemberServiceImpl memberServiceImpl = new MemberServiceImpl();
-        MemberController memberController = new MemberController();
+        MemberRepository memberRepository = new FileMemberRepository();
+        MemberService memberService = new MemberServiceImpl(memberRepository);
+        MemberController memberController = new MemberController(memberService);
 
         Scanner scanner = new Scanner(System.in);
 

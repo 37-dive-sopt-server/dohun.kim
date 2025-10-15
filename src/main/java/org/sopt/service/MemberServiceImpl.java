@@ -5,22 +5,14 @@ import java.util.List;
 import java.util.Optional;
 import org.sopt.domain.Gender;
 import org.sopt.domain.Member;
-import org.sopt.repository.FileMemberRepository;
 import org.sopt.repository.MemberRepository;
 
 public class MemberServiceImpl implements MemberService {
 
-    private static long sequence = 1L;
+    private final MemberRepository memberRepository;
 
-    private final MemberRepository memberRepository = new FileMemberRepository();
-
-    public MemberServiceImpl() {
-        sequence = Math.max(sequence,
-                memberRepository.findAll().stream()
-                        .mapToLong(Member::getId)
-                        .max()
-                        .orElse(0L)
-                        + 1);
+    public MemberServiceImpl(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
     }
 
     public synchronized Long join(String name, String email, Gender gender, LocalDate birthDate) {
