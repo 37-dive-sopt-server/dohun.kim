@@ -59,14 +59,16 @@ public class MemberFileStorage {
 
     private Optional<Member> deserialize(String line) {
         String[] tokens = line.split(DELIMITER, -1);
-        if (tokens.length != 5) return Optional.empty();
+        if (tokens.length != 5) {
+            return Optional.empty();
+        }
         try {
             Long id = Long.parseLong(tokens[0]);
             String name = tokens[1];
             String email = tokens[2];
-            Gender gender = Gender.valueOf(tokens[3].toUpperCase());
+            Gender gender = Gender.valueOf(tokens[3]);
             LocalDate birthDate = LocalDate.parse(tokens[4]);
-            return Optional.of(Member.createOf(id, name, email, gender, birthDate));
+            return Optional.of(Member.createWithId(id, name, email, gender, birthDate));
         } catch (Exception e) {
             return Optional.empty();
         }

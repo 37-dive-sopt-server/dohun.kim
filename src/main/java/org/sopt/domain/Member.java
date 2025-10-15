@@ -31,7 +31,11 @@ public class Member {
         return LocalDate.now().getYear() - birthDate.getYear() + 1;
     }
 
-    public static Member createOf(Long id, String name, String email, Gender gender, LocalDate birthDate) {
+    public static Member createWithoutId(String name, String email, Gender gender, LocalDate birthDate) {
+        return new Member(null, name, email, gender, birthDate);
+    }
+
+    public static Member createWithId(Long id, String name, String email, Gender gender, LocalDate birthDate) {
         return new Member(id, name, email, gender, birthDate);
     }
 
@@ -53,5 +57,9 @@ public class Member {
 
     public LocalDate getBirthDate() {
         return birthDate;
+    }
+
+    public int getAge() {
+        return age;
     }
 }

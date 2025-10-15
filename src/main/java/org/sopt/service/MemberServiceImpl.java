@@ -19,9 +19,7 @@ public class MemberServiceImpl implements MemberService {
         if (memberRepository.existsByEmail(email)) {
             throw new IllegalStateException("이미 존재하는 이메일입니다.");
         }
-        Long currentId = sequence++;
-        Member member = Member.createOf(currentId, name, email, gender, birthDate);
-        Member savedMember = memberRepository.save(member);
+        Member savedMember = memberRepository.save(Member.createWithoutId(name, email, gender, birthDate));
         return savedMember.getId();
     }
 

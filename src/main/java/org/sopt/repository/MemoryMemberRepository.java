@@ -9,12 +9,18 @@ import org.sopt.domain.Member;
 
 public class MemoryMemberRepository implements MemberRepository {
 
-    private static final Map<Long, Member> store = new HashMap<>();
+    private final Map<Long, Member> store = new HashMap<>();
+    private long sequence = 1L;
 
     @Override
     public Member save(Member member) {
-        store.put(member.getId(), member);
-        return member;
+        Member memberToStore = member;
+        if (member.getId() == null) {
+            memberToStore = Member.createWithId(sequence++, member.getName(), member.getEmail(), member.getGender(),
+                    member.getBirthDate());
+        }
+        store.put(memberToStore.getId(), memberToStore);
+        return memberToStore;
     }
 
     @Override

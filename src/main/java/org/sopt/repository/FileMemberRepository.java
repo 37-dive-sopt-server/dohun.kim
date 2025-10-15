@@ -14,16 +14,28 @@ public class FileMemberRepository implements MemberRepository {
 
     private final Map<Long, Member> store = new HashMap<>();
     private final MemberFileStorage storage = new MemberFileStorage(STORAGE_DIR_NAME, STORAGE_FILE_NAME);
+    private long sequence;
 
     public FileMemberRepository() {
         storage.loadAll().forEach(member -> store.put(member.getId(), member));
+        sequence = store.keySet().stream()
+                .mapToLong(Long::longValue)
+                .max()
+                .orElse(0L) + 1;
     }
 
     @Override
     public Member save(Member member) {
-        store.put(member.getId(), member);
+        Member memberToStore = member;
+        if (member.getId() == null) {
+            memberToStore = Member.createWithId(sequence++, member.getName(), member.getEmail(), member.getGender(),
+                    member.getBirthDate());
+        } else {
+            sequence = Math.max(sequence, member.getId() + 1);
+        }
+        store.put(memberToStore.getId(), memberToStore);
         storage.writeAll(store.values());
-        return member;
+        return memberToStore;
     }
 
     @Override
