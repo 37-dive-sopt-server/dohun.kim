@@ -11,7 +11,6 @@ public class Member {
     private String email;
     private Gender gender;
     private LocalDate birthDate;
-    private int age;
 
     private Member() {
     }
@@ -26,7 +25,6 @@ public class Member {
         if (calculatedAge < 20) {
             throw new MemberException(MemberErrorCode.UNDERAGE_MEMBER);
         }
-        this.age = calculatedAge;
     }
 
     private int calculateAge(LocalDate birthDate) {
@@ -59,9 +57,5 @@ public class Member {
 
     public LocalDate getBirthDate() {
         return birthDate;
-    }
-
-    public int getAge() {
-        return age;
     }
 }
