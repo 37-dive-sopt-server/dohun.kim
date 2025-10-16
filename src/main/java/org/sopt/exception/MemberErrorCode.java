@@ -11,7 +11,7 @@ public enum MemberErrorCode implements ErrorCode {
     INVALID_GENDER_INPUT(1008, "⚠️ 성별을 올바르게 입력해주세요 (MALE/FEMALE/OTHER)"),
     INVALID_ID_FORMAT(1009, "❌ 유효하지 않은 ID 형식입니다. 숫자만 입력해주세요."),
     MEMBER_REGISTRATION_FAILED(1010, "❌ 회원 등록 실패"),
-    UNDERAGE_MEMBER(1011, "⚠ 20세 미만은 가입할 수 없습니다.")
+    UNDERAGE_MEMBER(1011, "⚠️ 20세 미만은 가입할 수 없습니다.")
     ;
 
 
