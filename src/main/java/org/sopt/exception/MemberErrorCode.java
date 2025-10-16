@@ -1,8 +1,8 @@
 package org.sopt.exception;
 
 public enum MemberErrorCode implements ErrorCode {
-    INVALID_EMAIL_FORMAT(1001, "이메일 형식이 올바르지 않습니다."),
-    DUPLICATE_EMAIL(1002, "이미 존재하는 이메일입니다."),
+    INVALID_EMAIL_FORMAT(1001, "⚠️이메일 형식이 올바르지 않습니다."),
+    DUPLICATE_EMAIL(1002, "⚠️이미 존재하는 이메일입니다."),
     MEMBER_NOT_FOUND(1003, "⚠️ 해당 ID의 회원을 찾을 수 없습니다."),
     EMPTY_NAME(1004, "⚠️ 이름을 입력해주세요."),
     EMPTY_BIRTHDATE(1005, "⚠️ 생년월일을 입력해주세요."),
@@ -11,7 +11,8 @@ public enum MemberErrorCode implements ErrorCode {
     INVALID_GENDER_INPUT(1008, "⚠️ 성별을 올바르게 입력해주세요 (MALE/FEMALE/OTHER)"),
     INVALID_ID_FORMAT(1009, "❌ 유효하지 않은 ID 형식입니다. 숫자만 입력해주세요."),
     MEMBER_REGISTRATION_FAILED(1010, "❌ 회원 등록 실패"),
-    UNDERAGE_MEMBER(1011, "⚠️ 20세 미만은 가입할 수 없습니다.")
+    UNDERAGE_MEMBER(1011, "⚠️ 20세 미만은 가입할 수 없습니다."),
+    INVALID_NAME_FORMAT(1013, "⚠️ 이름은 숫자와 영어, 한글로만 구성될 수 있습니다."),
     ;
 
 
