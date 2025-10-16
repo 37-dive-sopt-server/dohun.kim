@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
+import org.sopt.config.AppConfig;
 import org.sopt.controller.MemberController;
 import org.sopt.domain.Gender;
 import org.sopt.domain.Member;
@@ -15,10 +16,8 @@ import org.sopt.service.MemberServiceImpl;
 public class Main {
     public static void main(String[] args) {
 
-        MemberRepository memberRepository = new FileMemberRepository();
-        MemberService memberService = new MemberServiceImpl(memberRepository);
-        MemberController memberController = new MemberController(memberService);
-
+        AppConfig appConfig = new AppConfig();
+        MemberController memberController = appConfig.memberController();
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
