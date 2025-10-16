@@ -17,7 +17,7 @@ public class MemberServiceImpl implements MemberService {
         this.memberRepository = memberRepository;
     }
 
-    public synchronized Long join(String name, String email, Gender gender, LocalDate birthDate) {
+    public Long join(String name, String email, Gender gender, LocalDate birthDate) {
         if (memberRepository.existsByEmail(email)) {
             throw new MemberException(MemberErrorCode.DUPLICATE_EMAIL);
         }

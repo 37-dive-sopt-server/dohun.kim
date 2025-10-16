@@ -15,7 +15,6 @@ public class MemberController {
         this.memberService = memberService;
     }
 
-
     public Long createMember(String name, String email, Gender gender, LocalDate birthDate) {
         return memberService.join(name, email, gender, birthDate);
     }
