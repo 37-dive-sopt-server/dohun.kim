@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 import org.sopt.domain.Gender;
 import org.sopt.domain.Member;
+import org.sopt.exception.MemberErrorCode;
+import org.sopt.exception.MemberException;
 import org.sopt.repository.MemberRepository;
 
 public class MemberServiceImpl implements MemberService {
@@ -17,7 +19,7 @@ public class MemberServiceImpl implements MemberService {
 
     public synchronized Long join(String name, String email, Gender gender, LocalDate birthDate) {
         if (memberRepository.existsByEmail(email)) {
-            throw new IllegalStateException("이미 존재하는 이메일입니다.");
+            throw new MemberException(MemberErrorCode.DUPLICATE_EMAIL);
         }
         Member savedMember = memberRepository.save(Member.createWithoutId(name, email, gender, birthDate));
         return savedMember.getId();
@@ -33,7 +35,7 @@ public class MemberServiceImpl implements MemberService {
 
     public void deleteMember(Long memberId) {
         if (!memberRepository.existsById(memberId)) {
-            throw new IllegalStateException("존재하지 않는 회원입니다.");
+            throw new MemberException(MemberErrorCode.MEMBER_NOT_FOUND);
         }
         memberRepository.deleteById(memberId);
     }

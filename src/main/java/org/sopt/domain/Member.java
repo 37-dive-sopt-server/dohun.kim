@@ -1,6 +1,8 @@
 package org.sopt.domain;
 
 import java.time.LocalDate;
+import org.sopt.exception.MemberErrorCode;
+import org.sopt.exception.MemberException;
 
 public class Member {
 
@@ -22,7 +24,7 @@ public class Member {
         this.birthDate = birthDate;
         int calculatedAge = calculateAge(birthDate);
         if (calculatedAge < 20) {
-            throw new IllegalArgumentException("20세 미만은 가입할 수 없습니다.");
+            throw new MemberException(MemberErrorCode.UNDERAGE_MEMBER);
         }
         this.age = calculatedAge;
     }
