@@ -5,6 +5,7 @@ import org.sopt.member.dto.response.MemberListResponse;
 import org.sopt.member.dto.response.MemberResponse;
 import org.sopt.global.common.dto.ApiResponse;
 import org.sopt.member.service.MemberService;
+import org.sopt.member.validator.MemberInputValidator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,16 +21,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class MemberController {
 
     private final MemberService memberService;
+    private final MemberInputValidator memberInputValidator;
 
-    public MemberController(MemberService memberService) {
+    public MemberController(MemberService memberService, MemberInputValidator memberInputValidator) {
         this.memberService = memberService;
+        this.memberInputValidator = memberInputValidator;
     }
 
     @PostMapping
-    public ResponseEntity<ApiResponse<MemberResponse>> createMember(@RequestBody MemberCreateRequest request) {
+    public ResponseEntity<ApiResponse<MemberResponse>> createMember(@RequestBody MemberCreateRequest memberCreateRequest) {
+        memberInputValidator.validate(memberCreateRequest);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(ApiResponse.ok(memberService.join(request)));
+                .body(ApiResponse.ok(memberService.join(memberCreateRequest)));
 
     }
 
