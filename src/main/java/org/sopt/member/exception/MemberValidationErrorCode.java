@@ -9,7 +9,7 @@ public enum MemberValidationErrorCode implements ErrorCode {
     EMPTY_BIRTHDATE(HttpStatus.BAD_REQUEST, 1002, "생년월일을 입력해주세요."),
     EMPTY_GENDER(HttpStatus.BAD_REQUEST, 1003, "성별을 입력해주세요."),
     INVALID_EMAIL_FORMAT(HttpStatus.BAD_REQUEST, 1004, "이메일 형식이 올바르지 않습니다."),
-    INVALID_NAME_FORMAT(HttpStatus.BAD_REQUEST, 1005, "이름은 숫자와 영어, 한글로만 구성될 수 있습니다."),
+    INVALID_NAME_FORMAT(HttpStatus.BAD_REQUEST, 1005, "이름 형식이 올바르지 않습니다.(숫자, 영어, 한글로만 구성 가능)"),
     INVALID_BIRTHDATE(HttpStatus.BAD_REQUEST, 1006, "생년월일이 현재 날짜 이후일 수 없습니다."),
     ;
 
