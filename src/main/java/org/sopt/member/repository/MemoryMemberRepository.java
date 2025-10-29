@@ -36,14 +36,14 @@ public class MemoryMemberRepository implements MemberRepository {
     }
 
     @Override
-    public Boolean existsById(Long memberId) {
+    public boolean existsById(Long memberId) {
         return store.containsKey(memberId);
     }
 
     @Override
-    public Boolean existsByEmail(String email) {
+    public boolean existsByEmail(String email) {
         return store.values().stream()
-                .anyMatch(member -> member.getEmail().equals(email));
+                .anyMatch(member -> member.hasEmail(email));
     }
 
     @Override

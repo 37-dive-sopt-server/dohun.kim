@@ -63,6 +63,10 @@ public class Member {
         return email;
     }
 
+    public boolean hasEmail(String email) {
+        return this.email.equals(email);
+    }
+
     public Gender getGender() {
         return gender;
     }
