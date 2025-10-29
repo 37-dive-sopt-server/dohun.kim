@@ -6,8 +6,8 @@ import org.sopt.member.domain.Member;
 import org.sopt.member.dto.request.MemberCreateRequest;
 import org.sopt.member.dto.response.MemberListResponse;
 import org.sopt.member.dto.response.MemberResponse;
-import org.sopt.member.exception.MemberErrorCode;
-import org.sopt.member.exception.MemberException;
+import org.sopt.member.exception.MemberDomainErrorCode;
+import org.sopt.member.exception.MemberDomainException;
 import org.sopt.member.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +22,7 @@ public class MemberServiceImpl implements MemberService {
 
     public MemberResponse join(MemberCreateRequest memberCreateRequest) {
         if (memberRepository.existsByEmail(memberCreateRequest.email())) {
-            throw new MemberException(MemberErrorCode.DUPLICATE_EMAIL);
+            throw new MemberDomainException(MemberDomainErrorCode.DUPLICATE_EMAIL);
         }
         Member savedMember = memberRepository.save(Member.createWithoutId(memberCreateRequest));
         return savedMember.toMemberResponse();
@@ -31,7 +31,7 @@ public class MemberServiceImpl implements MemberService {
     public MemberResponse findOne(Long memberId) {
         Optional<Member> foundMember = memberRepository.findById(memberId);
         if (foundMember.isEmpty()) {
-            throw new MemberException(MemberErrorCode.MEMBER_NOT_FOUND);
+            throw new MemberDomainException(MemberDomainErrorCode.MEMBER_NOT_FOUND);
         }
         return foundMember.get().toMemberResponse();
     }

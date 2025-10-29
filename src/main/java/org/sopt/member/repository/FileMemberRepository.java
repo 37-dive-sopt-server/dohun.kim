@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import org.sopt.member.domain.Member;
-import org.sopt.member.exception.MemberErrorCode;
-import org.sopt.member.exception.MemberException;
+import org.sopt.member.exception.MemberDomainErrorCode;
+import org.sopt.member.exception.MemberDomainException;
 import org.sopt.member.repository.storage.MemberFileStorage;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
@@ -62,8 +62,8 @@ public class FileMemberRepository implements MemberRepository {
 
     @Override
     public void deleteById(Long memberId) {
-        if (!store.containsKey(memberId)){
-            throw new MemberException(MemberErrorCode.MEMBER_NOT_FOUND);
+        if (!store.containsKey(memberId)) {
+            throw new MemberDomainException(MemberDomainErrorCode.MEMBER_NOT_FOUND);
         }
 
         if (store.remove(memberId) != null) {

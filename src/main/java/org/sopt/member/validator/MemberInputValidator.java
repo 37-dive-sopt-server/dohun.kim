@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.util.regex.Pattern;
 import org.sopt.member.domain.Gender;
 import org.sopt.member.dto.request.MemberCreateRequest;
-import org.sopt.member.exception.MemberErrorCode;
-import org.sopt.member.exception.MemberException;
+import org.sopt.member.exception.MemberValidationErrorCode;
+import org.sopt.member.exception.MemberValidationException;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -23,34 +23,34 @@ public class MemberInputValidator {
 
     private void validateEmail(String email) {
         if (email == null || email.trim().isEmpty()) {
-            throw new MemberException(MemberErrorCode.EMPTY_EMAIL);
+            throw new MemberValidationException(MemberValidationErrorCode.EMPTY_EMAIL);
         }
         if (!EMAIL_PATTERN.matcher(email).matches()) {
-            throw new MemberException(MemberErrorCode.INVALID_EMAIL_FORMAT);
+            throw new MemberValidationException(MemberValidationErrorCode.INVALID_EMAIL_FORMAT);
         }
     }
 
     private void validateName(String name) {
         if (name == null || name.trim().isEmpty()) {
-            throw new MemberException(MemberErrorCode.EMPTY_NAME);
+            throw new MemberValidationException(MemberValidationErrorCode.EMPTY_NAME);
         }
         if (!NAME_PATTERN.matcher(name).matches()) {
-            throw new MemberException(MemberErrorCode.INVALID_NAME_FORMAT);
+            throw new MemberValidationException(MemberValidationErrorCode.INVALID_NAME_FORMAT);
         }
     }
 
     private void validateBirthDate(LocalDate birthDate) {
         if (birthDate == null) {
-            throw new MemberException(MemberErrorCode.EMPTY_BIRTHDATE);
+            throw new MemberValidationException(MemberValidationErrorCode.EMPTY_BIRTHDATE);
         }
         if (birthDate.isAfter(LocalDate.now())) {
-            throw new MemberException(MemberErrorCode.INVALID_BIRTHDATE);
+            throw new MemberValidationException(MemberValidationErrorCode.INVALID_BIRTHDATE);
         }
     }
 
     private void validateGender(Gender gender) {
         if (gender == null) {
-            throw new MemberException(MemberErrorCode.EMPTY_GENDER);
+            throw new MemberValidationException(MemberValidationErrorCode.EMPTY_GENDER);
         }
     }
 

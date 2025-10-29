@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import org.sopt.member.domain.Member;
-import org.sopt.member.exception.MemberErrorCode;
-import org.sopt.member.exception.MemberException;
+import org.sopt.member.exception.MemberDomainErrorCode;
+import org.sopt.member.exception.MemberDomainException;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -45,8 +45,8 @@ public class MemoryMemberRepository implements MemberRepository {
 
     @Override
     public void deleteById(Long memberId) {
-        if (!store.containsKey(memberId)){
-            throw new MemberException(MemberErrorCode.MEMBER_NOT_FOUND);
+        if (!store.containsKey(memberId)) {
+            throw new MemberDomainException(MemberDomainErrorCode.MEMBER_NOT_FOUND);
         }
         store.remove(memberId);
     }

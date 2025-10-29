@@ -3,8 +3,8 @@ package org.sopt.member.domain;
 import java.time.LocalDate;
 import org.sopt.member.dto.request.MemberCreateRequest;
 import org.sopt.member.dto.response.MemberResponse;
-import org.sopt.member.exception.MemberErrorCode;
-import org.sopt.member.exception.MemberException;
+import org.sopt.member.exception.MemberDomainErrorCode;
+import org.sopt.member.exception.MemberDomainException;
 
 public class Member {
 
@@ -27,8 +27,8 @@ public class Member {
     }
 
     private void validateAge(LocalDate birthDate) {
-        if(calculateAgeFrom(birthDate) < 20) {
-            throw new MemberException(MemberErrorCode.UNDERAGE_MEMBER);
+        if (calculateAgeFrom(birthDate) < 20) {
+            throw new MemberDomainException(MemberDomainErrorCode.UNDERAGE_MEMBER);
         }
     }
 
