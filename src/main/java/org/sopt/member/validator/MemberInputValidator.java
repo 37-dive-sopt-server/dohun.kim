@@ -1,6 +1,7 @@
 package org.sopt.member.validator;
 
 import java.time.LocalDate;
+import java.util.regex.Pattern;
 import org.sopt.member.domain.Gender;
 import org.sopt.member.dto.request.MemberCreateRequest;
 import org.sopt.member.exception.MemberErrorCode;
@@ -10,8 +11,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class MemberInputValidator {
 
-    private static final String NAME_REGEX = "^[a-zA-Z0-9가-힣]+$";
-    private static final String EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+    private static final Pattern NAME_PATTERN = Pattern.compile("^[a-zA-Z0-9가-힣]+$");
+    private static final Pattern EMAIL_PATTERN = Pattern.compile("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
 
     public void validate(MemberCreateRequest memberCreateRequest) {
         validateEmail(memberCreateRequest.email());
@@ -24,7 +25,7 @@ public class MemberInputValidator {
         if (email == null || email.trim().isEmpty()) {
             throw new MemberException(MemberErrorCode.EMPTY_EMAIL);
         }
-        if (!email.matches(EMAIL_REGEX)) {
+        if (!EMAIL_PATTERN.matcher(email).matches()) {
             throw new MemberException(MemberErrorCode.INVALID_EMAIL_FORMAT);
         }
     }
@@ -33,7 +34,7 @@ public class MemberInputValidator {
         if (name == null || name.trim().isEmpty()) {
             throw new MemberException(MemberErrorCode.EMPTY_NAME);
         }
-        if (!name.matches(NAME_REGEX)) {
+        if (!NAME_PATTERN.matcher(name).matches()) {
             throw new MemberException(MemberErrorCode.INVALID_NAME_FORMAT);
         }
     }
@@ -42,7 +43,7 @@ public class MemberInputValidator {
         if (birthDate == null) {
             throw new MemberException(MemberErrorCode.EMPTY_BIRTHDATE);
         }
-        if( birthDate.isAfter(LocalDate.now())) {
+        if (birthDate.isAfter(LocalDate.now())) {
             throw new MemberException(MemberErrorCode.INVALID_BIRTHDATE);
         }
     }
