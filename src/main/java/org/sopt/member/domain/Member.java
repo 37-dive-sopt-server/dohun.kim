@@ -18,18 +18,21 @@ public class Member {
     }
 
     private Member(Long id, String name, String email, Gender gender, LocalDate birthDate) {
+        validateAge(birthDate);
         this.id = id;
         this.name = name;
         this.email = email;
         this.gender = gender;
         this.birthDate = birthDate;
-        int calculatedAge = calculateAge(birthDate);
-        if (calculatedAge < 20) {
+    }
+
+    private void validateAge(LocalDate birthDate) {
+        if(calculateAgeFrom(birthDate) < 20) {
             throw new MemberException(MemberErrorCode.UNDERAGE_MEMBER);
         }
     }
 
-    private int calculateAge(LocalDate birthDate) {
+    private static int calculateAgeFrom(LocalDate birthDate) {
         return LocalDate.now().getYear() - birthDate.getYear() + 1;
     }
 
@@ -43,12 +46,12 @@ public class Member {
         );
     }
 
-    public MemberResponse toMemberResponse() {
-        return new MemberResponse(id, name, email, gender, birthDate);
-    }
-
     public static Member createWithId(Long id, String name, String email, Gender gender, LocalDate birthDate) {
         return new Member(id, name, email, gender, birthDate);
+    }
+
+    public MemberResponse toMemberResponse() {
+        return new MemberResponse(id, name, email, gender, birthDate);
     }
 
     public Long getId() {
