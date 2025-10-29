@@ -1,5 +1,6 @@
 package org.sopt.global.exception;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import org.sopt.global.common.dto.ApiResponse;
 import org.springframework.http.HttpStatus;
@@ -48,7 +49,7 @@ public class GlobalExceptionHandler {
             return "'" + value + "' 값을 " +
                     invalidFormatException.getTargetType().getSimpleName() + "로 변환할 수 없습니다.";
         }
-        if (cause instanceof com.fasterxml.jackson.core.JsonParseException parseException) {
+        if (cause instanceof JsonParseException parseException) {
             return "JSON 구문 오류: " + parseException.getOriginalMessage();
         }
         if (cause != null) {
