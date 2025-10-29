@@ -6,9 +6,11 @@ import java.util.Map;
 import java.util.Optional;
 import org.sopt.member.domain.Member;
 import org.sopt.member.repository.storage.MemberFileStorage;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@Primary
 public class FileMemberRepository implements MemberRepository {
 
     private static final String STORAGE_DIR_NAME = "data";
