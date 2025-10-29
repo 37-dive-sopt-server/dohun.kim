@@ -46,9 +46,6 @@ public class MemberServiceImpl implements MemberService {
     }
 
     public void deleteMember(Long memberId) {
-        if (!memberRepository.existsById(memberId)) {
-            throw new MemberException(MemberErrorCode.MEMBER_NOT_FOUND);
-        }
         memberRepository.deleteById(memberId);
     }
 }

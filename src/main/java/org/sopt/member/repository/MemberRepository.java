@@ -8,7 +8,6 @@ public interface MemberRepository {
     Member save(Member member);
     Optional<Member> findById(Long memberId);
     List<Member> findAll();
-    boolean existsById(Long memberId);
     boolean existsByEmail(String email);
     void deleteById(Long memberId);
 }
