@@ -1,10 +1,10 @@
-package org.sopt.config;
+package org.sopt.global.config;
 
-import org.sopt.controller.MemberController;
-import org.sopt.repository.FileMemberRepository;
-import org.sopt.repository.MemberRepository;
-import org.sopt.service.MemberService;
-import org.sopt.service.MemberServiceImpl;
+import org.sopt.member.controller.MemberController;
+import org.sopt.member.repository.FileMemberRepository;
+import org.sopt.member.repository.MemberRepository;
+import org.sopt.member.service.MemberService;
+import org.sopt.member.service.MemberServiceImpl;
 
 public class AppConfig {
 

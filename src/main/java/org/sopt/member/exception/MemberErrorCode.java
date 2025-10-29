@@ -1,5 +1,6 @@
-package org.sopt.exception;
+package org.sopt.member.exception;
 
+import org.sopt.global.exception.ErrorCode;
 import org.springframework.http.HttpStatus;
 
 public enum MemberErrorCode implements ErrorCode {
@@ -14,7 +15,9 @@ public enum MemberErrorCode implements ErrorCode {
     INVALID_ID_FORMAT(HttpStatus.BAD_REQUEST.value(), 1009, "❌ 유효하지 않은 ID 형식입니다. 숫자만 입력해주세요."),
     MEMBER_REGISTRATION_FAILED(HttpStatus.INTERNAL_SERVER_ERROR.value(), 1010, "❌ 회원 등록 실패"),
     UNDERAGE_MEMBER(HttpStatus.FORBIDDEN.value(), 1011, "⚠️ 20세 미만은 가입할 수 없습니다."),
-    INVALID_NAME_FORMAT(HttpStatus.BAD_REQUEST.value(), 1013, "⚠️ 이름은 숫자와 영어, 한글로만 구성될 수 있습니다."),
+    INVALID_NAME_FORMAT(HttpStatus.BAD_REQUEST.value(), 1012, "⚠️ 이름은 숫자와 영어, 한글로만 구성될 수 있습니다."),
+    EMPTY_GENDER(HttpStatus.BAD_REQUEST.value(), 1013, "⚠️ 성별을 입력해주세요."),
+    INVALID_BIRTHDATE(HttpStatus.BAD_REQUEST.value(), 1014, "⚠️ 생년월일이 현재 날짜 이후일 수 없습니다.")
     ;
 
     private final int statusCode;

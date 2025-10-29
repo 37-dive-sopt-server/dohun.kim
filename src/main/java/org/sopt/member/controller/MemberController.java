@@ -1,10 +1,10 @@
-package org.sopt.controller;
+package org.sopt.member.controller;
 
-import org.sopt.dto.MemberCreateRequest;
-import org.sopt.dto.MemberListResponse;
-import org.sopt.dto.MemberResponse;
+import org.sopt.member.dto.request.MemberCreateRequest;
+import org.sopt.member.dto.response.MemberListResponse;
+import org.sopt.member.dto.response.MemberResponse;
 import org.sopt.global.common.dto.ApiResponse;
-import org.sopt.service.MemberService;
+import org.sopt.member.service.MemberService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;

@@ -1,10 +1,10 @@
-package org.sopt.domain;
+package org.sopt.member.domain;
 
 import java.time.LocalDate;
-import org.sopt.dto.MemberCreateRequest;
-import org.sopt.dto.MemberResponse;
-import org.sopt.exception.MemberErrorCode;
-import org.sopt.exception.MemberException;
+import org.sopt.member.dto.request.MemberCreateRequest;
+import org.sopt.member.dto.response.MemberResponse;
+import org.sopt.member.exception.MemberErrorCode;
+import org.sopt.member.exception.MemberException;
 
 public class Member {
 

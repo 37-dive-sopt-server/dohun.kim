@@ -1,4 +1,4 @@
-package org.sopt.validator;
+package org.sopt.member.validator;
 
 import java.time.LocalDate;
 import org.sopt.domain.Gender;

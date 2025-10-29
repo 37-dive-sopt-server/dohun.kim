@@ -1,14 +1,14 @@
-package org.sopt.service;
+package org.sopt.member.service;
 
 import java.util.List;
 import java.util.Optional;
-import org.sopt.domain.Member;
-import org.sopt.dto.MemberCreateRequest;
-import org.sopt.dto.MemberListResponse;
-import org.sopt.dto.MemberResponse;
-import org.sopt.exception.MemberErrorCode;
-import org.sopt.exception.MemberException;
-import org.sopt.repository.MemberRepository;
+import org.sopt.member.domain.Member;
+import org.sopt.member.dto.request.MemberCreateRequest;
+import org.sopt.member.dto.response.MemberListResponse;
+import org.sopt.member.dto.response.MemberResponse;
+import org.sopt.member.exception.MemberErrorCode;
+import org.sopt.member.exception.MemberException;
+import org.sopt.member.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 
 @Service
