@@ -1,7 +1,5 @@
 package org.sopt.global.exception;
 
-import org.sopt.exception.BaseException;
-import org.sopt.exception.ErrorCode;
 import org.sopt.global.common.dto.ApiResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
