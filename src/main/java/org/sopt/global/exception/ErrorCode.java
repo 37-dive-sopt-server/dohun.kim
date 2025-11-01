@@ -1,6 +1,7 @@
-package org.sopt.exception;
+package org.sopt.global.exception;
 
 public interface ErrorCode {
+    int getStatusCode();
     int getExceptionCode();
     String getMessage();
 }

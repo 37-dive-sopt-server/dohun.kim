@@ -1,4 +1,4 @@
-package org.sopt.repository.storage;
+package org.sopt.member.repository.storage;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,8 +13,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import org.sopt.domain.Gender;
-import org.sopt.domain.Member;
+import org.sopt.member.domain.Gender;
+import org.sopt.member.domain.Member;
 
 public class MemberFileStorage {
 

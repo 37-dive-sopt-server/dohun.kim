@@ -1,12 +1,18 @@
-package org.sopt.repository;
+package org.sopt.member.repository;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import org.sopt.domain.Member;
-import org.sopt.repository.storage.MemberFileStorage;
+import org.sopt.member.domain.Member;
+import org.sopt.member.exception.MemberDomainErrorCode;
+import org.sopt.member.exception.MemberDomainException;
+import org.sopt.member.repository.storage.MemberFileStorage;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Repository;
 
+@Repository
+@Primary
 public class FileMemberRepository implements MemberRepository {
 
     private static final String STORAGE_DIR_NAME = "data";
@@ -49,18 +55,17 @@ public class FileMemberRepository implements MemberRepository {
     }
 
     @Override
-    public Boolean existsById(Long memberId) {
-        return store.containsKey(memberId);
-    }
-
-    @Override
-    public Boolean existsByEmail(String email) {
+    public boolean existsByEmail(String email) {
         return store.values().stream()
-                .anyMatch(member -> member.getEmail().equals(email));
+                .anyMatch(member -> member.hasEmail(email));
     }
 
     @Override
     public void deleteById(Long memberId) {
+        if (!store.containsKey(memberId)) {
+            throw new MemberDomainException(MemberDomainErrorCode.MEMBER_NOT_FOUND);
+        }
+
         if (store.remove(memberId) != null) {
             storage.writeAll(store.values());
         }

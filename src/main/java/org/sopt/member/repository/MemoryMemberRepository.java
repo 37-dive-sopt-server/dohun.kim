@@ -1,12 +1,16 @@
-package org.sopt.repository;
+package org.sopt.member.repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import org.sopt.domain.Member;
+import org.sopt.member.domain.Member;
+import org.sopt.member.exception.MemberDomainErrorCode;
+import org.sopt.member.exception.MemberDomainException;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class MemoryMemberRepository implements MemberRepository {
 
     private final Map<Long, Member> store = new HashMap<>();
@@ -34,18 +38,16 @@ public class MemoryMemberRepository implements MemberRepository {
     }
 
     @Override
-    public Boolean existsById(Long memberId) {
-        return store.containsKey(memberId);
-    }
-
-    @Override
-    public Boolean existsByEmail(String email) {
+    public boolean existsByEmail(String email) {
         return store.values().stream()
-                .anyMatch(member -> member.getEmail().equals(email));
+                .anyMatch(member -> member.hasEmail(email));
     }
 
     @Override
     public void deleteById(Long memberId) {
+        if (!store.containsKey(memberId)) {
+            throw new MemberDomainException(MemberDomainErrorCode.MEMBER_NOT_FOUND);
+        }
         store.remove(memberId);
     }
 }
