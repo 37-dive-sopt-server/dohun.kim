@@ -37,3 +37,6 @@ out/
 .vscode/
 
 /data
+
+### application yaml ###
+application*.yml
