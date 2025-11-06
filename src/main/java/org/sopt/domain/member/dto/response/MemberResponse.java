@@ -1,7 +1,7 @@
-package org.sopt.member.dto.response;
+package org.sopt.domain.member.dto.response;
 
 import java.time.LocalDate;
-import org.sopt.member.domain.Gender;
+import org.sopt.domain.member.entity.Gender;
 
 public record MemberResponse(
         Long id,

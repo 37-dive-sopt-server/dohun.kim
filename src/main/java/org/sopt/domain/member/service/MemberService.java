@@ -1,8 +1,8 @@
-package org.sopt.member.service;
+package org.sopt.domain.member.service;
 
-import org.sopt.member.dto.request.MemberCreateRequest;
-import org.sopt.member.dto.response.MemberListResponse;
-import org.sopt.member.dto.response.MemberResponse;
+import org.sopt.domain.member.dto.request.MemberCreateRequest;
+import org.sopt.domain.member.dto.response.MemberListResponse;
+import org.sopt.domain.member.dto.response.MemberResponse;
 
 public interface MemberService {
 

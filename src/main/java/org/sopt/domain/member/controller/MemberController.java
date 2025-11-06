@@ -1,11 +1,11 @@
-package org.sopt.member.controller;
+package org.sopt.domain.member.controller;
 
-import org.sopt.member.dto.request.MemberCreateRequest;
-import org.sopt.member.dto.response.MemberListResponse;
-import org.sopt.member.dto.response.MemberResponse;
+import org.sopt.domain.member.dto.request.MemberCreateRequest;
+import org.sopt.domain.member.dto.response.MemberListResponse;
+import org.sopt.domain.member.dto.response.MemberResponse;
 import org.sopt.global.common.dto.ApiResponse;
-import org.sopt.member.service.MemberService;
-import org.sopt.member.validator.MemberInputValidator;
+import org.sopt.domain.member.service.MemberService;
+import org.sopt.domain.member.validator.MemberInputValidator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;

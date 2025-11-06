@@ -1,7 +1,7 @@
-package org.sopt.member.dto.request;
+package org.sopt.domain.member.dto.request;
 
 import java.time.LocalDate;
-import org.sopt.member.domain.Gender;
+import org.sopt.domain.member.entity.Gender;
 
 public record MemberCreateRequest(
         String name,

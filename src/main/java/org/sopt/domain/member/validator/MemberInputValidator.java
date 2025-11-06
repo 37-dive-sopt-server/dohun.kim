@@ -1,11 +1,11 @@
-package org.sopt.member.validator;
+package org.sopt.domain.member.validator;
 
 import java.time.LocalDate;
 import java.util.regex.Pattern;
-import org.sopt.member.domain.Gender;
-import org.sopt.member.dto.request.MemberCreateRequest;
-import org.sopt.member.exception.MemberValidationErrorCode;
-import org.sopt.member.exception.MemberValidationException;
+import org.sopt.domain.member.entity.Gender;
+import org.sopt.domain.member.dto.request.MemberCreateRequest;
+import org.sopt.domain.member.exception.MemberValidationErrorCode;
+import org.sopt.domain.member.exception.MemberValidationException;
 import org.springframework.stereotype.Component;
 
 @Component
