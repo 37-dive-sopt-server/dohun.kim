@@ -1,14 +1,14 @@
-package org.sopt.member.service;
+package org.sopt.domain.member.service;
 
 import java.util.List;
 import java.util.Optional;
-import org.sopt.member.domain.Member;
-import org.sopt.member.dto.request.MemberCreateRequest;
-import org.sopt.member.dto.response.MemberListResponse;
-import org.sopt.member.dto.response.MemberResponse;
-import org.sopt.member.exception.MemberDomainErrorCode;
-import org.sopt.member.exception.MemberDomainException;
-import org.sopt.member.repository.MemberRepository;
+import org.sopt.domain.member.entity.Member;
+import org.sopt.domain.member.dto.request.MemberCreateRequest;
+import org.sopt.domain.member.dto.response.MemberListResponse;
+import org.sopt.domain.member.dto.response.MemberResponse;
+import org.sopt.domain.member.exception.MemberDomainErrorCode;
+import org.sopt.domain.member.exception.MemberDomainException;
+import org.sopt.domain.member.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,10 +21,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     public MemberResponse join(MemberCreateRequest memberCreateRequest) {
-        if (memberRepository.existsByEmail(memberCreateRequest.email())) {
-            throw new MemberDomainException(MemberDomainErrorCode.DUPLICATE_EMAIL);
-        }
-        Member savedMember = memberRepository.save(Member.createWithoutId(memberCreateRequest));
+        Member savedMember = memberRepository.save(Member.of(memberCreateRequest));
         return savedMember.toMemberResponse();
     }
 
