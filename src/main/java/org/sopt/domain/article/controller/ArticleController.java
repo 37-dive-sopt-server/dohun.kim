@@ -2,6 +2,7 @@ package org.sopt.domain.article.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.sopt.domain.article.dto.request.ArticleCreateRequest;
+import org.sopt.domain.article.dto.request.ArticleSearchRequest;
 import org.sopt.domain.article.dto.response.ArticleListResponse;
 import org.sopt.domain.article.dto.response.ArticleResponse;
 import org.sopt.domain.article.service.ArticleService;
@@ -9,6 +10,7 @@ import org.sopt.global.common.dto.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -43,5 +45,13 @@ public class ArticleController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(ApiResponse.ok(articleService.getAllArticles()));
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<ApiResponse<ArticleListResponse>> searchArticles(
+            @ModelAttribute ArticleSearchRequest request) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(ApiResponse.ok(articleService.searchArticles(request)));
     }
 }

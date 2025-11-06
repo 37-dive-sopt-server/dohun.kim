@@ -3,6 +3,7 @@ package org.sopt.domain.article.service;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.sopt.domain.article.dto.request.ArticleCreateRequest;
+import org.sopt.domain.article.dto.request.ArticleSearchRequest;
 import org.sopt.domain.article.dto.response.ArticleListResponse;
 import org.sopt.domain.article.dto.response.ArticleResponse;
 import org.sopt.domain.article.entity.Article;
@@ -43,6 +44,29 @@ public class ArticleService {
 
     public ArticleListResponse getAllArticles() {
         List<Article> articles = articleRepository.findAll();
+        return new ArticleListResponse(
+                articles.stream()
+                        .map(Article::toArticleResponse)
+                        .toList()
+        );
+    }
+
+    public ArticleListResponse searchArticles(ArticleSearchRequest request) {
+        String title = request.title();
+        String authorName = request.authorName();
+
+        List<Article> articles;
+
+        if (title != null && authorName != null) {
+            articles = articleRepository.findByTitleContainingIgnoreCaseAndAuthor_NameContainingIgnoreCase(title, authorName);
+        } else if (title != null) {
+            articles = articleRepository.findByTitleContainingIgnoreCase(title);
+        } else if (authorName != null) {
+            articles = articleRepository.findByAuthor_NameContainingIgnoreCase(authorName);
+        } else {
+            articles = articleRepository.findAll();
+        }
+
         return new ArticleListResponse(
                 articles.stream()
                         .map(Article::toArticleResponse)
