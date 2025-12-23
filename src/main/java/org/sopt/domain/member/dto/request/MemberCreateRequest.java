@@ -6,6 +6,7 @@ import org.sopt.domain.member.entity.Gender;
 public record MemberCreateRequest(
         String name,
         String email,
+        String password,
         Gender gender,
         LocalDate birthdate
 ) {

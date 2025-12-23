@@ -19,6 +19,7 @@ import org.sopt.domain.member.exception.MemberDomainErrorCode;
 import org.sopt.domain.member.exception.MemberDomainException;
 
 @Entity
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder(access = AccessLevel.PRIVATE)
@@ -26,7 +27,6 @@ public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
     private Long id;
 
     @Column(nullable = false)
@@ -41,6 +41,9 @@ public class Member {
 
     @Column(nullable = false)
     private LocalDate birthDate;
+
+    @Column(nullable = false)
+    private String password;
 
     private static void validateAge(LocalDate birthDate) {
         if (calculateAgeFrom(birthDate) < 20) {
@@ -57,6 +60,7 @@ public class Member {
         return Member.builder()
                 .name(memberCreateRequest.name())
                 .email(memberCreateRequest.email())
+                .password(memberCreateRequest.password())
                 .gender(memberCreateRequest.gender())
                 .birthDate(memberCreateRequest.birthdate())
                 .build();
