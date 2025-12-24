@@ -50,8 +50,7 @@ public class ArticleService {
     }
 
     public ArticleResponse getArticleById(Long articleId) {
-        Article article = articleRepository.findById(articleId)
-                .orElseThrow(() -> new ArticleDomainException(ArticleDomainErrorCode.ARTICLE_NOT_FOUND));
+        Article article = getArticleWithComments(articleId);
         return article.toArticleResponse();
     }
 
@@ -114,7 +113,7 @@ public class ArticleService {
     }
 
     public CommentListResponse getArticleComments(Long articleId) {
-        Article article = getArticle(articleId);
+        Article article = getArticleWithComments(articleId);
         List<CommentResponse> comments = article.getComments().stream()
                 .map(Comment::toCommentResponse)
                 .toList();
@@ -134,6 +133,11 @@ public class ArticleService {
     private Member getMember(Long memberId) {
         return memberRepository.findById(memberId)
                 .orElseThrow(() -> new MemberDomainException(MemberDomainErrorCode.MEMBER_NOT_FOUND));
+    }
+
+    private Article getArticleWithComments(Long articleId) {
+        return articleRepository.findWithCommentsById(articleId)
+                .orElseThrow(() -> new ArticleDomainException(ArticleDomainErrorCode.ARTICLE_NOT_FOUND));
     }
 
     private Comment getArticleComment(Long articleId, Long commentId) {
